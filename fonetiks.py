@@ -15,6 +15,7 @@ english = english.replace('sure','ʃur')
 english = english.replace('co','ko') #soft c -> s
 english = english.replace('cu','ku') #hard c -> k
 english = english.replace('ca','ka') #ch sound -> c
+english = english.replace('ck','k')
 english = english.replace('ic','ik')
 english = english.replace('ci','si')
 english = english.replace('ce','se')
