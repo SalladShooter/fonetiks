@@ -1,7 +1,3 @@
-import re
-import nltk
-from nltk.corpus import cmudict
-
 """
 Guide To The Letters:
 | Þ þ - th : thistle, math - þistel, maþ
@@ -14,22 +10,56 @@ Guide To The Letters:
 | Ö ö - oo : cooperate, co-op - cöperate, cöp
 """
 
-nltk.download('cmudict')
+import re
+import nltk
+from nltk.corpus import cmudict
 
+nltk.download('cmudict', quiet=True)
 pronouncing_dict = cmudict.dict()
 
-soft_th_words = set()
-for word, pron in pronouncing_dict.items():
-    if any('DH' in p for p in pron):
-        soft_th_words.add(word.lower())
+soft_th_words = {
+    word.lower() for word, prons in pronouncing_dict.items()
+    if any('DH' in pron for pron in prons)
+}
+ae_words = {
+    word.lower() for word, prons in pronouncing_dict.items()
+    if any('AE' in phone for pron in prons for phone in pron)
+}
+oe_words = {
+    word.lower() for word, prons in pronouncing_dict.items()
+    if any('IY' in phone for pron in prons for phone in pron)
+}
 
-english = input('English to convert:\n').lower()
+text = input('Text to convert:\n')
 thornmode = 'Y'
+
+def replace_all(match):
+    word = match.group(0)
+    key = re.sub(r'\W+', '', word.lower())
+    new_word = word
+
+    if 'th' in word.lower():
+        if key in soft_th_words:
+            new_word = re.sub('th', 'ð', new_word, count=1, flags=re.IGNORECASE)
+        elif thornmode == 'Y':
+            new_word = re.sub('th', 'þ', new_word, count=1, flags=re.IGNORECASE)
+        else:
+            new_word = re.sub('th', 'ð', new_word, count=1, flags=re.IGNORECASE)
+
+    if key in ae_words:
+        index = new_word.lower().find('a')
+        if index != -1:
+            new_word = new_word[:index] + 'æ' + new_word[index+1:]
+
+    if key in oe_words:
+        index = new_word.lower().find('e')
+        if index != -1:
+            new_word = new_word[:index] + 'œ' + new_word[index+1:]
+
+    return new_word
 
 replacements = [
     ('thom', 'tom'),
-    ('at', 'æt'),
-    ('oe', 'œ'),
     ('coope', 'cöpe'),
     ('co-op', 'cöp'),
     ('sh', 'ʃ'),
@@ -69,25 +99,11 @@ replacements = [
     ('uld','ud'),
 ]
 
+text = re.sub(r'\b\w+\b', replace_all, text)
 for old, new in replacements:
-    english = english.replace(old, new)
-    
-def replace_th(match):
-    word = match.group(0)
-    cleaned = re.sub(r'\W+', '', word)
-    if cleaned in soft_th_words:
-        return word.replace('th', 'ð', 1)
-    elif thornmode == 'Y':
-        return word.replace('th', 'þ', 1)
-    else:
-        return word.replace('th', 'ð', 1)
+    text = text.replace(old, new)
 
-pattern = re.compile(r'\b\w*th\w*\b')
-english = pattern.sub(replace_th, english)
-
-print(f"\nThe Output is:\n{english}")
+print(f"\nThe Output is:\n{text}")
 print("Note: You may need to manually adjust edge cases.")
 # recent changes since last update:
-# merged PR from SalladShooter which both optimizes and makes it a lot easier to contribute
-# added of -> ov back
-# added uld -> ud back
+# merged another PR from SalladShooter
