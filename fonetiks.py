@@ -8,23 +8,24 @@ if thornmode == 'Y':
 elif thornmode == 'n':
     english = english.replace('th','ð')
 else:
-    print('sorry, thornmode toggle could not be determined.') #might be redundant
+    print('sorry, thornmode toggle could not be determined.') # might be redundant
 english = english.replace('sh','ʃ')
 english = english.replace('tio','ʃo')
 english = english.replace('sio','ʃo')
 english = english.replace('sure','ʃur')
-english = english.replace('co','ko') #soft c -> s
-english = english.replace('cu','ku') #hard c -> k
-english = english.replace('ca','ka') #ch sound -> c
+english = english.replace('co','ko') # soft c -> s
+english = english.replace('cu','ku') # hard c -> k
+english = english.replace('ca','ka')
 english = english.replace('ck','k')
 english = english.replace('ic','ik')
 english = english.replace('ci','si')
 english = english.replace('ce','se')
-english = english.replace('ch','c')
+english = english.replace('ch','c') # ch sound is absorbed by c alone
 english = english.replace('ec','ek')
-english = english.replace('cem','kem')
+english = english.replace('cem','kem') # realized words like chemistry would become cemistry instead of kemistry
+english = english.replace('nge','nje')
 english = english.replace('ng','ŋ')
-english = english.replace('ph','f')
+english = english.replace('ph','f') # we have a letter for this sound
 english = english.replace('cough','koff')
 english = english.replace('laugh','laff')
 english = english.replace('enough','enuf')
@@ -42,8 +43,6 @@ english = english.replace('of','ov')
 english = english.replace('uld','ud')
 print('sorry this may not be perfect (it isnt) and you may need to make edits after.\nbut the output is:\n'+english)
 # recent changes since last update:
-# of -> ov
-# enough -> enuf
-# uld -> ud
-# throu -> thru
-# maybe some other stuff i forgot i added
+# added and moved some comments
+# nge -> nje
+
