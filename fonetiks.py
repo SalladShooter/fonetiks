@@ -10,6 +10,8 @@ else:
     print('sorry, thornmode toggle could not be determined.') #might be redundant
 english = english.replace('sh','ʃ')
 english = english.replace('tio','ʃo')
+english = english.replace('sio','ʃo')
+english = english.replace('sure','ʃur')
 english = english.replace('co','ko') #soft c -> s
 english = english.replace('cu','ku') #hard c -> k
 english = english.replace('ca','ka') #ch sound -> c
