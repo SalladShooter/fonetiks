@@ -37,21 +37,23 @@ replacements = [
     ('sio', 'ʃo'),
     ('sure', 'ʃur'),
     ('le', 'el'),
-    ('co', 'ko'),
-    ('cu', 'ku'),
+    ('co', 'ko'), # soft c -> s
+    ('cu', 'ku'), # hard c -> k
     ('ca', 'ka'),
     ('ck', 'k'),
     ('ic', 'ik'),
     ('ci', 'si'),
     ('ce', 'se'),
-    ('ch', 'c'),
+    ('ch', 'c'), # ch sound is absorbed by c alone
     ('ec', 'ek'),
-    ('cem', 'kem'),
+    ('cem', 'kem'), # for words like chemistry
+    ('nge','nje'),
     ('ng', 'ŋ'),
-    ('ph', 'f'),
-    ('ause', 'uz'),
+    ('ph', 'f'), # we have a letter for this sound
+    ('ause', 'auz'),
     ('cough', 'koff'),
     ('laugh', 'laff'),
+    ('enough','enuf'),
     ('ough', 'o'),
     ('gh', ''),
     ('ax', 'aks'),
@@ -61,7 +63,10 @@ replacements = [
     ('ex', 'eks'),
     ('x', 'z'),
     ('oo', 'u'),
+    # ('ge','j'),
     ('throu', 'thru'),
+    ('of','ov'),
+    ('uld','ud'),
 ]
 
 for old, new in replacements:
@@ -82,3 +87,7 @@ english = pattern.sub(replace_th, english)
 
 print(f"\nThe Output is:\n{english}")
 print("Note: You may need to manually adjust edge cases.")
+# recent changes since last update:
+# merged PR from SalladShooter which both optimizes and makes it a lot easier to contribute
+# added of -> ov back
+# added uld -> ud back
