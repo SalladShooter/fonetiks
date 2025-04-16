@@ -30,10 +30,30 @@ oe_words = {
     if any('IY' in phone for pron in prons for phone in pron)
 }
 
-text = input('Text to convert:\n')
-thornmode = 'Y'
+chose = input("Convert or revert [C/r]")
 
-def replace_all(match):
+thornmode = 'Y'
+def revert_all(match):
+    word = match.group(0)
+    new_word = word
+
+    if 'ð' in new_word.lower():
+        new_word = re.sub('ð', 'th', new_word, flags=re.IGNORECASE)
+    if 'þ' in new_word.lower():
+        new_word = re.sub('þ', 'th', new_word, flags=re.IGNORECASE)
+
+    if 'æ' in new_word.lower():
+        index = new_word.lower().find('æ')
+        if index != -1:
+            new_word = new_word[:index] + 'a' + new_word[index+1:]
+
+    if 'œ' in new_word.lower():
+        index = new_word.lower().find('œ')
+        if index != -1:
+            new_word = new_word[:index] + 'e' + new_word[index+1:]
+
+    return new_word
+def convert_all(match):
     word = match.group(0)
     key = re.sub(r'\W+', '', word.lower())
     new_word = word
@@ -57,7 +77,6 @@ def replace_all(match):
             new_word = new_word[:index] + 'œ' + new_word[index+1:]
 
     return new_word
-
 replacements = [
     ('thom', 'tom'),
     ('coope', 'cöpe'),
@@ -97,13 +116,60 @@ replacements = [
     ('throu', 'thru'),
     ('of','ov'),
     ('uld','ud'),
+    ]
+reverse_replacements = [#still needs to be reviewed and edited for more accurate conversion
+    ('tom', 'thom'),
+    ('cöpe', 'coope'),
+    ('cöp', 'co-op'),
+    ('ʃ', 'sh'),
+    ('ʃo', 'tio'),
+    ('ʃo', 'sio'),
+    ('ʃur', 'sure'),
+    ('el', 'le'),
+    ('ko', 'co'),
+    ('ku', 'cu'),
+    ('ka', 'ca'),
+    ('k', 'ck'),
+    ('ik', 'ic'),
+    ('si', 'ci'),
+    ('se', 'ce'),
+    ('c', 'ch'),
+    ('ek', 'ec'),
+    ('kem', 'cem'),
+    ('nje', 'nge'),
+    ('ŋ', 'ng'),
+    ('f', 'ph'),
+    ('auz', 'ause'),
+    ('koff', 'cough'),
+    ('laff', 'laugh'),
+    ('enuf', 'enough'),
+    ('aks', 'ax'),
+    ('oks', 'ox'),
+    ('uks', 'ux'),
+    ('iks', 'ix'),
+    ('eks', 'ex'),
+    ('z', 'x'),
+    ('u', 'oo'),
+    ('thru', 'throu'),
+    ('ov', 'of'),
+    ('ud', 'uld'),
 ]
 
-text = re.sub(r'\b\w+\b', replace_all, text)
-for old, new in replacements:
-    text = text.replace(old, new)
+
+text = input('Text to convert:\n')
+
+if chose == "C":
+    text = re.sub(r'\b\w+\b', convert_all, text)
+    for old, new in replacements:
+        text = text.replace(old, new)
+else:
+    text = re.sub(r'\b\w+\b', revert_all, text)
+    for old, new in reverse_replacements:
+        text = text.replace(old, new)
+
 
 print(f"\nThe Output is:\n{text}")
-print("Note: You may need to manually adjust edge cases.")
+print("Note: This is not exact and you might need to manualy desipher.")
 # recent changes since last update:
 # merged another PR from SalladShooter
+# added the option to revert converted text from ChickenJack007
