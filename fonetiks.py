@@ -15,7 +15,7 @@ import nltk
 from nltk.corpus import cmudict
 from nltk.corpus import wordnet
 
-nltk.download('wordnet')
+nltk.download('wordnet', quiet=True)
 nltk.download('cmudict', quiet=True)
 pronouncing_dict = cmudict.dict()
 
