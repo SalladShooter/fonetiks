@@ -1,11 +1,11 @@
 """
 Guide To The Letters:
-| Þ þ - th : thistle, math - þistel, maþ
-| Ð ð - th : the, that - ðe, ðæt
+| Þ þ - th : thistle, math - þistle, maþ
+| Ð ð - th : the, that - ðe, ðat
 | Ʃ ʃ - sh : shush - ʃuʃ
 | Æ æ - a : cat, sat, that - cæt, sæt, ðæt
-| Œ œ - ee : Fhœnix, Onomatopœia
-| Ŋ ŋ - ng : someþiŋ
+| Œ œ - ee : Phœnix, Onomatopœia
+| Ŋ ŋ - ng : somethiŋ
 | C c - ch : choose - coose
 | Ö ö - oo : cooperate, co-op - cöperate, cöp
 """
@@ -13,7 +13,9 @@ Guide To The Letters:
 import re
 import nltk
 from nltk.corpus import cmudict
+from nltk.corpus import wordnet
 
+nltk.download('wordnet')
 nltk.download('cmudict', quiet=True)
 pronouncing_dict = cmudict.dict()
 
@@ -99,9 +101,9 @@ replacements = [
     ('ex', 'eks'),
     ('x', 'z'),
     ('oo', 'u'),
-    ('of', 'ov'),
-    ('uld', 'ud'),
     ('throu', 'thru'),
+    ('of ','ov '),
+    ('uld','ud'),
 ]
 
 def apply_replacements(text):
@@ -117,3 +119,6 @@ text = apply_replacements(text)
 
 print(f"\nThe Output is:\n{text}")
 print("Note: You may need to manually adjust edge cases.")
+# recent changes since last update:
+# in initial multi line comment, isolated letter changes for clarity
+# included package 'wordnet' because nltk was complaining
