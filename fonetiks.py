@@ -1,3 +1,4 @@
+# fonetiks!
 english = input('english to convert:\n')
 thornmode = input(':: is thorn mode enabled? [Y/n] ')
 while thornmode != 'Y' and thornmode != 'n':
@@ -26,6 +27,7 @@ english = english.replace('ng','ŋ')
 english = english.replace('ph','f')
 english = english.replace('cough','koff')
 english = english.replace('laugh','laff')
+english = english.replace('enough','enuf')
 english = english.replace('gh','')
 english = english.replace('ax','aks')
 english = english.replace('ox','oks')
@@ -36,5 +38,12 @@ english = english.replace('x','z')
 english = english.replace('oo','u')
 # english = english.replace('ge','j')
 english = english.replace('throu','thru')
+english = english.replace('of','ov')
+english = english.replace('uld','ud')
 print('sorry this may not be perfect (it isnt) and you may need to make edits after.\nbut the output is:\n'+english)
-
+# recent changes since last update:
+# of -> ov
+# enough -> enuf
+# uld -> ud
+# throu -> thru
+# maybe some other stuff i forgot i added
