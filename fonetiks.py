@@ -77,6 +77,7 @@ replacements = [
     ('ca', 'ka'),
     ('ck', 'k'),
     ('ic', 'ik'),
+    ('cr','kr'),
     ('ikh','ic'),
     ('ci', 'si'),
     ('ce', 'se'),
