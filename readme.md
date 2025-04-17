@@ -1,7 +1,7 @@
 # Fonetiks
 A project to try and make english more phonetic whilst keeping the pronounciation intact!
 ## How to assist 
-Make a seprate fork then make a pull request so we can review and add your changes
+Make a seprate fork then make a pull request so we can review and add your changes. But keep your vibe coding out of our project!
 ## Changes to major build
 - cleaned up some code in the script because why not :SMUFED
 - merged another PR from SalladShooter
