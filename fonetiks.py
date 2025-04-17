@@ -113,6 +113,7 @@ replacements = [
     ('kss','ks'), # for words like excited
     ('idk','idg'),
     ('ture','cur'),
+    ('æcʃ','ækʃ'),
 ]
 
 text = re.sub(r'\b\w+\b',replace_all,input('\nText to convert:\n'))

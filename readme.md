@@ -1,8 +1,7 @@
 # Fonetiks
 A project to try and make english more phonetic whilst keeping the pronounciation intact!
 ## Example
-This is an example of the script in action.
-Ðis is æn eksæmple ov ðe skript in æcʃon.
+This is an example of the script in action. Ðis is æn eksæmple ov ðe skript in ækʃon.
 ## How to assist 
 Make a seprate fork then make a pull request so we can review and add your changes. But keep your vibe coding out of our project!
 ## Changes to major build
@@ -14,5 +13,6 @@ Make a seprate fork then make a pull request so we can review and add your chang
 ## Minor changes
 - changes to replacements list
 - new lines for input, output, and closing note
-- AxolotlInANutshell disagreed that the code was self-explanatory, so added example to readme.md
+- added example to readme.md
+- fixed example in readme.md
 
