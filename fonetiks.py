@@ -70,15 +70,17 @@ replacements = [
     ('tio', 'ʃo'),
     ('sio', 'ʃo'),
     ('sure', 'ʃur'),
-    ('le', 'el'),
+    # ('le', 'el'),
     ('co', 'ko'),
     ('cu', 'ku'),
     ('ca', 'ka'),
     ('ck', 'k'),
     ('ic', 'ik'),
+    ('ikh','ic'),
     ('ci', 'si'),
     ('ce', 'se'),
-    ('ch', 'c'),
+    ('ch','c'),
+    ('kn','gn'),
     ('ec', 'ek'),
     ('cem', 'kem'),
     ('nge','nje'),
@@ -90,6 +92,7 @@ replacements = [
     ('enough','enuf'),
     ('ough', 'o'),
     ('gh', ''),
+    ('exa','egza'),
     ('ax', 'aks'),
     ('ox', 'oks'),
     ('ux', 'uks'),
@@ -100,9 +103,10 @@ replacements = [
     ('throu', 'thru'),
     ('of ','ov '), # space because of words like off
     ('uld','ud'),
+    ('kss','ks'),
 ]
 
-text = re.sub(r'\b\w+\b',replace_all,input('Text to convert:\n'))
+text = re.sub(r'\b\w+\b',replace_all,input('\nText to convert:\n'))
 for old, new in replacements:
     text = text.replace(old, new)
 
@@ -116,4 +120,4 @@ def apply_replacements(text):
 
 text = apply_replacements(re.sub(r'\b\w+\b',replace_all,text))
 
-print(f"\nThe Output is:\n{text}\n\nNote: You may need to manually adjust edge cases.")
+print(f"\nThe Output is:\n{text}\n\nNote: You may need to manually adjust edge cases.\n")
