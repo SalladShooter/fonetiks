@@ -98,7 +98,7 @@ replacements = [
     ('x', 'z'),
     ('oo', 'u'),
     ('throu', 'thru'),
-    ('of ','ov '),
+    ('of ','ov '), # space because of words like off
     ('uld','ud'),
 ]
 
@@ -113,10 +113,6 @@ def apply_replacements(text):
             return preserve_case(m.group(), new)
         text = pattern.sub(repl, text)
     return text
-
-text = apply_replacements(re.sub(r'\b\w+\b',replace_all,text))
-
-print(f"\nThe Output is:\n{text}\n\nNote: You may need to manually adjust edge cases.")
 
 text = apply_replacements(re.sub(r'\b\w+\b',replace_all,text))
 
