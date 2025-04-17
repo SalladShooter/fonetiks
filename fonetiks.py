@@ -97,7 +97,7 @@ replacements = [
     ('oo', 'u'),
     # ('ge','j'),
     ('throu', 'thru'),
-    ('of ','ov '),
+    ('of ','ov '), # space because of words like off
     ('uld','ud'),
 ]
 
@@ -108,6 +108,5 @@ for old, new in replacements:
 print(f"\nThe Output is:\n{text}")
 print("Note: You may need to manually adjust edge cases.")
 # recent changes since last update:
-# in initial multi line comment, isolated letter changes for clarity
-# included package 'wordnet' because nltk was complaining
+# added a comment explaining space in of -> ov
 
