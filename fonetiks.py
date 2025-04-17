@@ -29,36 +29,38 @@ ae_words = {
 }
 oe_words = {
     word.lower() for word, prons in pronouncing_dict.items()
-    if any('IY' in phone for pron in prons for phone in pron)
+    if any('OE' in phone for pron in prons for phone in pron)
 }
 
-text = input('Text to convert:\n')
-thornmode = 'Y'
+def preserve_case(original, replacement):
+    if original.isupper():
+        return replacement.upper()
+    elif original[0].isupper():
+        return replacement.capitalize()
+    else:
+        return replacement.lower()
 
 def replace_all(match):
     word = match.group(0)
-    key = re.sub(r'\W+', '', word.lower())
-    new_word = word
+    key = re.sub(r'\W+','', word.lower())
 
     if 'th' in word.lower():
         if key in soft_th_words:
-            new_word = re.sub('th', 'ð', new_word, count=1, flags=re.IGNORECASE)
-        elif thornmode == 'Y':
-            new_word = re.sub('th', 'þ', new_word, count=1, flags=re.IGNORECASE)
+            word = re.sub(r'th', lambda m: preserve_case(m.group(), 'ð'), word, count=1, flags=re.IGNORECASE)
         else:
-            new_word = re.sub('th', 'ð', new_word, count=1, flags=re.IGNORECASE)
+            word = re.sub(r'th', lambda m: preserve_case(m.group(), 'þ'), word, count=1, flags=re.IGNORECASE)
 
     if key in ae_words:
-        index = new_word.lower().find('a')
-        if index != -1:
-            new_word = new_word[:index] + 'æ' + new_word[index+1:]
+        match_a = re.search(r'a', word, re.IGNORECASE)
+        if match_a:
+            word = word[:match_a.start()] + preserve_case(match_a.group(), 'æ') + word[match_a.end():]
 
     if key in oe_words:
-        index = new_word.lower().find('e')
-        if index != -1:
-            new_word = new_word[:index] + 'œ' + new_word[index+1:]
+        match_e = re.search(r'e', word, re.IGNORECASE)
+        if match_e:
+            word = word[:match_e.start()] + preserve_case(match_e.group(), 'œ') + word[match_e.end():]
 
-    return new_word
+    return word
 
 replacements = [
     ('thom', 'tom'),
@@ -69,19 +71,19 @@ replacements = [
     ('sio', 'ʃo'),
     ('sure', 'ʃur'),
     ('le', 'el'),
-    ('co', 'ko'), # soft c -> s
-    ('cu', 'ku'), # hard c -> k
+    ('co', 'ko'),
+    ('cu', 'ku'),
     ('ca', 'ka'),
     ('ck', 'k'),
     ('ic', 'ik'),
     ('ci', 'si'),
     ('ce', 'se'),
-    ('ch', 'c'), # ch sound is absorbed by c alone
+    ('ch', 'c'),
     ('ec', 'ek'),
-    ('cem', 'kem'), # for words like chemistry
+    ('cem', 'kem'),
     ('nge','nje'),
     ('ng', 'ŋ'),
-    ('ph', 'f'), # we have a letter for this sound
+    ('ph', 'f'),
     ('ause', 'auz'),
     ('cough', 'koff'),
     ('laugh', 'laff'),
@@ -95,18 +97,23 @@ replacements = [
     ('ex', 'eks'),
     ('x', 'z'),
     ('oo', 'u'),
-    # ('ge','j'),
     ('throu', 'thru'),
     ('of ','ov '), # space because of words like off
     ('uld','ud'),
 ]
 
-text = re.sub(r'\b\w+\b', replace_all, text)
+text = re.sub(r'\b\w+\b',replace_all,input('Text to convert:\n'))
 for old, new in replacements:
     text = text.replace(old, new)
 
-print(f"\nThe Output is:\n{text}")
-print("Note: You may need to manually adjust edge cases.")
-# recent changes since last update:
-# added a comment explaining space in of -> ov
+def apply_replacements(text):
+    for old, new in replacements:
+        pattern = re.compile(re.escape(old), re.IGNORECASE)
+        def repl(m):
+            return preserve_case(m.group(), new)
+        text = pattern.sub(repl, text)
+    return text
 
+text = apply_replacements(re.sub(r'\b\w+\b',replace_all,text))
+
+print(f"\nThe Output is:\n{text}\n\nNote: You may need to manually adjust edge cases.")
