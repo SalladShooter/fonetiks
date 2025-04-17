@@ -31,6 +31,10 @@ oe_words = {
     word.lower() for word, prons in pronouncing_dict.items()
     if any('OE' in phone for pron in prons for phone in pron)
 }
+soft_g_words = {
+    word.lower() for word, prons in pronouncing_dict.items()
+    if any('JH' in pron for pron in prons)
+}
 
 def preserve_case(original, replacement):
     if original.isupper():
@@ -59,6 +63,10 @@ def replace_all(match):
         match_e = re.search(r'e', word, re.IGNORECASE)
         if match_e:
             word = word[:match_e.start()] + preserve_case(match_e.group(), 'œ') + word[match_e.end():]
+
+    if 'ge' in word.lower(): # works only sometimes, needs work
+        if key in soft_g_words:
+            word = re.sub(r'ge', lambda m: preserve_case(m.group(), 'je'), word, count=1, flags=re.IGNORECASE)
 
     return word
 
@@ -97,8 +105,8 @@ replacements = [
     ('laugh', 'laff'),
     ('enough','enuf'),
     ('ough', 'o'),
-    ('gh', ''),
-    ('exa','egza'),
+    ('gh', ''), # seriously, why is gh sometimes silent but sometimes f?
+    ('exa','egza'), # for words like examine
     ('exi','egzi'),
     ('ax', 'aks'),
     ('ox', 'oks'),
@@ -110,10 +118,10 @@ replacements = [
     ('throu', 'thru'),
     ('of ','ov '), # space because of words like off
     ('uld','ud'),
-    ('kss','ks'), # for words like excited
+    ('kss','ks'), # for words like excited and excel
     ('idk','idg'),
-    ('ture','cur'),
-    ('æcʃ','ækʃ'),
+    ('ture','cur'), #for words like aperture
+    ('æcʃ','ækʃ'), # for words like action
 ]
 
 text = re.sub(r'\b\w+\b',replace_all,input('\nText to convert:\n'))
