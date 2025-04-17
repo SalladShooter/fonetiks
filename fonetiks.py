@@ -81,11 +81,13 @@ replacements = [
     ('ch', 'c'),
     ('ec', 'ek'),
     ('cem', 'kem'),
+    ('nge','nje'),
     ('ng', 'ŋ'),
     ('ph', 'f'),
-    ('ause', 'uz'),
+    ('ause', 'auz'),
     ('cough', 'koff'),
     ('laugh', 'laff'),
+    ('enough','enuf'),
     ('ough', 'o'),
     ('gh', ''),
     ('ax', 'aks'),
@@ -111,6 +113,10 @@ def apply_replacements(text):
             return preserve_case(m.group(), new)
         text = pattern.sub(repl, text)
     return text
+
+text = apply_replacements(re.sub(r'\b\w+\b',replace_all,text))
+
+print(f"\nThe Output is:\n{text}\n\nNote: You may need to manually adjust edge cases.")
 
 text = apply_replacements(re.sub(r'\b\w+\b',replace_all,text))
 
