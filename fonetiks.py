@@ -15,7 +15,7 @@ import nltk
 from nltk.corpus import cmudict
 from nltk.corpus import wordnet
 
-nltk.download('wordnet', quiet=True)
+nltk.download('wordnet', quiet=True) # nltk complains without it
 nltk.download('cmudict', quiet=True)
 pronouncing_dict = cmudict.dict()
 
@@ -112,6 +112,7 @@ replacements = [
     ('uld','ud'),
     ('kss','ks'), # for words like excited
     ('idk','idg'),
+    ('ture','cur'),
 ]
 
 text = re.sub(r'\b\w+\b',replace_all,input('\nText to convert:\n'))
