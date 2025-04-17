@@ -122,6 +122,7 @@ replacements = [
     ('idk','idg'),
     ('ture','cur'), #for words like aperture
     ('æcʃ','ækʃ'), # for words like action
+    ('wið','wiþ'), # just for the word with
 ]
 
 text = re.sub(r'\b\w+\b',replace_all,input('\nText to convert:\n'))
