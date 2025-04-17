@@ -84,10 +84,12 @@ replacements = [
     ('ch','c'),
     ('kn','gn'),
     ('ec', 'ek'),
+    ('act','akt'), # for words like act and character and actor
     ('cem', 'kem'),
     ('whik','which'),
     ('nge','nje'),
     ('ng', 'ŋ'),
+    ('nk','ŋk'),
     ('ph', 'f'),
     ('ause', 'auz'),
     ('cough', 'koff'),
@@ -107,7 +109,8 @@ replacements = [
     ('throu', 'thru'),
     ('of ','ov '), # space because of words like off
     ('uld','ud'),
-    ('kss','ks'),
+    ('kss','ks'), # for words like excited
+    ('idk','idg'),
 ]
 
 text = re.sub(r'\b\w+\b',replace_all,input('\nText to convert:\n'))
