@@ -95,7 +95,7 @@ replacements = [
     ('ec', 'ek'),
     ('act','akt'), # for words like act and character and actor
     ('cem', 'kem'),
-    ('whik','which'),
+    ('whik','whic'),
     ('nge','nje'),
     ('ng', 'ŋ'),
     ('nk','ŋk'),
@@ -104,6 +104,7 @@ replacements = [
     ('cough', 'koff'),
     ('laugh', 'laff'),
     ('enough','enuf'),
+    ('tough','tuff'),
     ('ough', 'o'),
     ('gh', ''), # seriously, why is gh sometimes silent but sometimes f?
     ('exa','egza'), # for words like examine
@@ -123,6 +124,7 @@ replacements = [
     ('ture','cur'), #for words like aperture
     ('æcʃ','ækʃ'), # for words like action
     ('wið','wiþ'), # just for the word with
+    ('arsitekkur','arkitekcure'),
 ]
 
 text = re.sub(r'\b\w+\b',replace_all,input('\nText to convert:\n'))
