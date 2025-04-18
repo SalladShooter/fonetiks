@@ -1,5 +1,9 @@
 # Fonetiks
 A project to try and make english more phonetic whilst keeping the pronounciation intact!
+## Website
+https://salladshooter.github.io/fonetiks-website/
+## Website repo
+https://github.com/SalladShooter/fonetiks-website
 ## Example
 This is an example of the script in action. Ðis is æn eksæmple ov ðe skript in ækʃon.
 ## How to assist 
