@@ -64,7 +64,7 @@ def replace_all(match):
         if match_e:
             word = word[:match_e.start()] + preserve_case(match_e.group(), 'œ') + word[match_e.end():]
 
-    if 'ge' in word.lower(): # works only sometimes, needs work
+    if 'ge' in word.lower(): # works only sometimes, and only on the first instance of a soft g in a word. needs work.
         if key in soft_g_words:
             word = re.sub(r'ge', lambda m: preserve_case(m.group(), 'je'), word, count=1, flags=re.IGNORECASE)
 
@@ -101,6 +101,7 @@ replacements = [
     ('nk','ŋk'),
     ('ph', 'f'),
     ('ause', 'auz'),
+    ('ouse','aus'),
     ('cough', 'koff'),
     ('laugh', 'laff'),
     ('enough','enuf'),
@@ -116,7 +117,8 @@ replacements = [
     ('ex', 'eks'),
     ('x', 'z'),
     ('oo', 'u'),
-    ('throu', 'thru'),
+    ('þro', 'þru'),
+    ('þruw','þrow'),
     ('of ','ov '), # space because of words like off
     ('uld','ud'),
     ('kss','ks'), # for words like excited and excel
@@ -124,7 +126,9 @@ replacements = [
     ('ture','cur'), #for words like aperture
     ('æcʃ','ækʃ'), # for words like action
     ('wið','wiþ'), # just for the word with
-    ('arsitekkur','arkitekcure'),
+    ('arsitekkur','arkitekcur'),
+    ('geo','jeo'), # redundancy because soft g -> j function doesnt always work; ex. on words like geode
+    ('rge','rje'), # redundancy for similar reason to above
 ]
 
 text = re.sub(r'\b\w+\b',replace_all,input('\nText to convert:\n'))
