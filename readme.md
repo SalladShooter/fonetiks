@@ -59,6 +59,8 @@ Make a seprate fork then make a pull request so we can review and add your chang
 - ᚪ - a : y[a]w (yaw) - ᚣ[ᚪ]ᚹ
 - ᚫ - ae : th[a]t (ðæt) - ᚦ[ᚫ]ᛏ
 - ᛠ - ea : [ea]r (ear) - [ᛠ]ᚱ
-- ᚣ - y : yes (yes) - ᚣᛖᛋ
+- ᚣ - y : [y]es (yes) - [ᚣ]ᛖᛋ
 - ᛣ - k : [k]ite (kite) - [ᛣ]ᛁᛏᛖ
 - ᛢ - q : [q]ue (que) - [ᛢ]ᚢᛖ
+- ᛒᛥ - v : [v]room (vrœm) - [ᛒᛥ]ᚱᛟᛗ
+- ᛋᛥ - z : [z]ebra (zebra) - [ᛋᛥ]ᛖᛒᚱᚪ
