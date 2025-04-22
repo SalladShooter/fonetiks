@@ -1,5 +1,10 @@
 # Fonetiks
 A project to try and make english more phonetic whilst keeping the pronounciation intact!
+
+| Keyboard Download      |       |
+| ------------- | ------------- |
+| MacOS | [Fonetiks Futhorc.keylayout](https://github.com/SalladShooter/fonetiks/blob/main/Fonetiks%20Futhorc.keylayout) |
+
 ## Website
 https://salladshooter.github.io/fonetiks-website/
 ## Website repo
