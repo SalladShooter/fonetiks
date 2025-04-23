@@ -1,0 +1,148 @@
+"""
+Guide To The Letters:
+| Þ þ - th : thistle, math - þistle, maþ
+| Ð ð - th : the, that - ðe, ðat
+| Ʃ ʃ - sh : shush - ʃuʃ
+| Æ æ - a : cat, sat, that - cæt, sæt, ðæt
+| Œ œ - ee : Phœnix, Onomatopœia
+| Ŋ ŋ - ng : somethiŋ
+| C c - ch : choose - coose
+| Ö ö - oo : cooperate, co-op - cöperate, cöp
+"""
+
+import re
+import nltk
+from nltk.corpus import cmudict
+from nltk.corpus import wordnet
+
+nltk.download('wordnet', quiet=True) # nltk complains without it
+nltk.download('cmudict', quiet=True)
+pronouncing_dict = cmudict.dict()
+
+soft_th_words = {
+    word.lower() for word, prons in pronouncing_dict.items()
+    if any('DH' in pron for pron in prons)
+}
+ae_words = {
+    word.lower() for word, prons in pronouncing_dict.items()
+    if any('AE' in phone for pron in prons for phone in pron)
+}
+oe_words = {
+    word.lower() for word, prons in pronouncing_dict.items()
+    if any('OE' in phone for pron in prons for phone in pron)
+}
+soft_g_words = {
+    word.lower() for word, prons in pronouncing_dict.items()
+    if any('JH' in pron for pron in prons)
+}
+
+def preserve_case(original, replacement):
+    if original.isupper():
+        return replacement.upper()
+    elif original[0].isupper():
+        return replacement.capitalize()
+    else:
+        return replacement.lower()
+
+def replace_all(match):
+    word = match.group(0)
+    key = re.sub(r'\W+','', word.lower())
+
+    if 'th' in word.lower():
+        if key in soft_th_words:
+            word = re.sub(r'th', lambda m: preserve_case(m.group(), 'ð'), word, count=1, flags=re.IGNORECASE)
+        else:
+            word = re.sub(r'th', lambda m: preserve_case(m.group(), 'þ'), word, count=1, flags=re.IGNORECASE)
+
+    if key in ae_words:
+        match_a = re.search(r'a', word, re.IGNORECASE)
+        if match_a:
+            word = word[:match_a.start()] + preserve_case(match_a.group(), 'æ') + word[match_a.end():]
+
+    if key in oe_words:
+        match_e = re.search(r'e', word, re.IGNORECASE)
+        if match_e:
+            word = word[:match_e.start()] + preserve_case(match_e.group(), 'œ') + word[match_e.end():]
+
+    if 'ge' in word.lower(): # works only sometimes, and only on the first instance of a soft g in a word. needs work.
+        if key in soft_g_words:
+            word = re.sub(r'ge', lambda m: preserve_case(m.group(), 'je'), word, count=1, flags=re.IGNORECASE)
+
+    return word
+
+replacements = [
+    ('thom', 'tom'),
+    ('coope', 'cöpe'),
+    ('co-op', 'cöp'),
+    ('alk','ak'),
+    ('sh', 'ʃ'),
+    ('tio', 'ʃo'),
+    ('sio', 'ʃo'),
+    ('sure', 'ʃur'),
+    # ('le', 'el'),
+    ('co', 'ko'),
+    ('cu', 'ku'),
+    ('ca', 'ka'),
+    ('ck', 'k'),
+    ('ic', 'ik'),
+    ('cr','kr'),
+    ('ikh','ic'),
+    ('ci', 'si'),
+    ('ce', 'se'),
+    ('cy','sy'),
+    ('ch','c'),
+    ('kn','gn'),
+    ('ec', 'ek'),
+    ('act','akt'), # for words like act and character and actor
+    ('cem', 'kem'),
+    ('whik','whic'),
+    ('nge','nje'),
+    ('ng', 'ŋ'),
+    ('nk','ŋk'),
+    ('ph', 'f'),
+    ('ause', 'auz'),
+    ('ouse','aus'),
+    ('cough', 'koff'),
+    ('laugh', 'laff'),
+    ('enough','enuf'),
+    ('tough','tuff'),
+    ('ough', 'o'),
+    ('gh', ''), # seriously, why is gh sometimes silent but sometimes f?
+    ('exa','egza'), # for words like examine
+    ('exi','egzi'),
+    ('ax', 'aks'),
+    ('ox', 'oks'),
+    ('ux', 'uks'),
+    ('ix', 'iks'),
+    ('ex', 'eks'),
+    ('x', 'z'),
+    ('oo', 'u'),
+    ('þro', 'þru'),
+    ('þruw','þrow'),
+    ('of ','ov '), # space because of words like off
+    ('uld','ud'),
+    ('kss','ks'), # for words like excited and excel
+    ('idk','idg'),
+    ('ture','cur'), #for words like aperture
+    ('æcʃ','ækʃ'), # for words like action
+    ('wið','wiþ'), # just for the word with
+    ('arsitekkur','arkitekcur'),
+    ('geo','jeo'), # redundancy because soft g -> j function doesnt always work; ex. on words like geode
+    ('rge','rje'), # redundancy for similar reason to above
+]
+
+text = re.sub(r'\b\w+\b',replace_all,input('\nText to convert:\n'))
+for old, new in replacements:
+    text = text.replace(old, new)
+
+def apply_replacements(text):
+    for old, new in replacements:
+        pattern = re.compile(re.escape(old), re.IGNORECASE)
+        def repl(m):
+            return preserve_case(m.group(), new)
+        text = pattern.sub(repl, text)
+    return text
+
+text = apply_replacements(re.sub(r'\b\w+\b',replace_all,text))
+
+print(f"\nThe Output is:\n{text}\n\nNote: You may need to manually adjust edge cases.\n")
