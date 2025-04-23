@@ -26,7 +26,7 @@ Make a seprate fork then make a pull request so we can review and add your chang
 - added example to readme.md
 - fixed example in readme.md
 
-## Guide To The Letters (Fonetiks:
+## Guide To The Letters (Fonetiks):
 - Þ þ - th : [th]istle, ma[th] - [þ]istle, ma[þ]
 - Ð ð - th : [th]e, [th]at - [ð]e, [ð]æt
 - Ʃ ʃ - sh : [sh]u[sh] - [ʃ]u[ʃ]
