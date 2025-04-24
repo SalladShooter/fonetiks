@@ -14,18 +14,11 @@ This is an example of the script in action. Ðis is æn eksæmple ov ðe skript 
 ## How to assist 
 Make a seprate fork then make a pull request so we can review and add your changes. But keep your vibe coding out of our project!
 ## Changes to major build
-- cleaned up some code in the script because why not :SMUFED
 - merged another PR from SalladShooter
-- added the option to revert converted text from ChickenJack007, in experimental branch
-- in initial multi line comment, isolated letter changes for clarity
-- included package 'wordnet' because nltk was complaining
+- removed package 'wordnet' because nltk stopped complaining on my machine
 - soft g to j sometimes, needs work
 ## Minor changes
-- changes to replacements list
-- new lines for input, output, and closing note
-- added example to readme.md
-- fixed example in readme.md
-
+- more replacements
 ## Guide To The Letters (Fonetiks):
 - Þ þ - th : [th]istle, ma[th] - [þ]istle, ma[þ]
 - Ð ð - th : [th]e, [th]at - [ð]e, [ð]æt
@@ -35,7 +28,6 @@ Make a seprate fork then make a pull request so we can review and add your chang
 - Ŋ ŋ - ng : somethi[ng] - somethi[ŋ]
 - C c - ch : [ch]oose - [c]oose
 - Ö ö - oo : c[oo]perate, c[o-o]p - c[ö]perate, c[ö]p
-
 ## Guide To The Runes (With Fonetiks):
 - ᚠ - f : [f]ight (fite) - [ᚠ]ᛁᛏ
 - ᚢ - u : pl[u]me (plume) - ᛈᛚ[ᚢ]ᛗᛖ
