@@ -112,7 +112,6 @@ replacements = [
     ('geo','jeo'), # redundancy because soft g -> j function doesnt always work; ex. on words like geode
     ('rge','rje'), # redundancy for similar reason to above
 ]
-
 rune_replacements = [
     ('ᛒᛥ', 'v'),
     ('ᛋᛥ', 'z'),
@@ -148,17 +147,15 @@ rune_replacements = [
     ('ᛟ', 'oe'),
     ('•', ' ')
 ]
-
 RUNES = {
-    'f': 'ᚠ', 'u': 'ᚢ', 'ð': 'ᚦ', 'þ': 'ᚦ', 'o': 'ᚩ',
-    'r': 'ᚱ', 'c': 'ᚳ', 'g': 'ᚷ', 'w': 'ᚹ', 'h': 'ᚻ',
-    'n': 'ᚾ', 'i': 'ᛁ', 'j': 'ᛡ', 'p': 'ᛈ', 'ks': 'ᛉ',
-    's': 'ᛋ', 't': 'ᛏ', 'b': 'ᛒ', 'e': 'ᛖ', 'm': 'ᛗ',
-    'l': 'ᛚ', 'ŋ': 'ᛝ', 'œ': 'ᛟ', 'd': 'ᛞ', 'a': 'ᚪ',
-    'æ': 'ᚫ', 'ea': 'ᛠ', 'y': 'ᚣ', 'ʃ': 'ᛋᚻ', 'ö': 'ᚩᚩ',
-    'k': 'ᛣ', 'q': 'ᛢ', 'v': 'ᛒᛥ', 'z': 'ᛋᛥ'
+    'f': 'ᚠ', 'u': 'ᚢ', 'ð': 'ᚦ', 'þ': 'ᚦ', 'o': 'ᚩ', 
+    'r': 'ᚱ', 'c': 'ᚳ', 'g': 'ᚷ', 'w': 'ᚹ', 'h': 'ᚻ', 
+    'n': 'ᚾ', 'i': 'ᛁ', 'j': 'ᛡ', 'p': 'ᛈ', 'ks': 'ᛉ', 
+    's': 'ᛋ', 't': 'ᛏ', 'b': 'ᛒ', 'e': 'ᛖ', 'm': 'ᛗ', 
+    'l': 'ᛚ', 'ŋ': 'ᛝ', 'œ': 'ᛟ', 'd': 'ᛞ', 'a': 'ᚪ', 
+    'æ': 'ᚫ', 'ea': 'ᛠ', 'y': 'ᚣ', 'ʃ': 'ᛋᚻ', 'ö': 'ᚩᚩ', 
+    'k': 'ᛣ', 'q': 'ᛢ', 'v': 'ᛒᛥ', 'z': 'ᛋᛥ', ' ': '•',
 }
-
 def replace_all_runes(match):
     word = match.group(0)
     key = re.sub(r'\W+', '', word)
@@ -319,3 +316,4 @@ if __name__ == "__main__":
     window.resize(600, 500)
     window.show()
     sys.exit(app.exec())
+
